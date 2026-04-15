@@ -62,14 +62,6 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    name: "Sugari",
-    description: "A multi-purpose Discord bot that I contributed a small part of.",
-    descriptionZhTW: "一個多功能的 Discord 機器人，我貢獻了一小部分。",
-    repo: "Sugari-Bot",
-    tags: ["discord bot", "python"],
-    featured: false,
-  },
-  {
     name: "Guoba Network",
     description: "Image sharing network implemented with Discord bot, made for a friend.",
     descriptionZhTW: "為朋友製作的基於 Discord 機器人實現的圖片分享網路。",
