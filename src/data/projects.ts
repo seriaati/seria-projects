@@ -128,7 +128,7 @@ export const projects: Project[] = [
   },
   {
     name: "genshin.py",
-    description: "Async API wrapper for HoYoLAB/Miyoushe API built on asyncio and pydantic. Main contributor.",
+    description: "Async API wrapper for HoYoLAB/Miyoushe API built on asyncio and pydantic.",
     descriptionZhTW: "HoYoLAB/米游社 API 的異步封裝，我是主要貢獻者。",
     repo: "genshin.py",
     tags: ["python", "wrapper"],
