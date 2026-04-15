@@ -5,9 +5,10 @@ import ProjectCard from "./ProjectCard.astro";
 
 interface Props {
   projects: Project[];
+  starsMap?: Record<string, number>;
 }
 
-const { projects } = Astro.props;
+const { projects, starsMap = {} } = Astro.props;
 ---
 
 <div class="filter-root">
@@ -49,7 +50,7 @@ const { projects } = Astro.props;
         data-description-zh-tw={(project.descriptionZhTW ?? project.description).toLowerCase()}
         data-tags={project.tags.join(",")}
       >
-        <ProjectCard project={project} index={i} />
+        <ProjectCard project={project} index={i} stars={starsMap[project.repo]} />
       </div>
     ))}
   </div>

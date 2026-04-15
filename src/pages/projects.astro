@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectsFilter from "../components/ProjectsFilter.astro";
 import { projects } from "../data/projects";
+import { fetchStars } from "../lib/github";
+
+const starsMap = await fetchStars(projects.map((p) => p.repo));
 ---
 
 <Layout title="Projects — Seria" description="All projects by Seria. Searchable and filterable by tag.">
@@ -20,7 +23,7 @@ import { projects } from "../data/projects";
     </div>
 
     <div class="page-body">
-      <ProjectsFilter projects={projects} />
+      <ProjectsFilter projects={projects} starsMap={starsMap} />
     </div>
   </main>
 </Layout>
