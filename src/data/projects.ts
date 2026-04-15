@@ -16,7 +16,7 @@ export const projects: Project[] = [
     description: "A feature-rich, beautifully designed Discord bot for Hoyoverse gamers.",
     descriptionZhTW: "為米哈游玩家設計的功能豐富且美觀的 Discord 機器人。",
     repo: "hoyo-buddy",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: true,
     url: "https://hb.seria.moe",
   },
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     description: "A Genshin Impact Discord bot. Hoyo Buddy is a rewrite of it.",
     descriptionZhTW: "原神 Discord 機器人，Hoyo Buddy 是它的重寫版。",
     repo: "shenhe_bot",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: false,
   },
   {
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     description: "A feature-rich Discord bot for fixing social media embeds.",
     descriptionZhTW: "修復社交媒體 Embed 的功能豐富的 Discord 機器人。",
     repo: "embed-fixer",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: true,
     url: "https://ef.seria.moe",
   },
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     description: "Your life organizer on Discord.",
     descriptionZhTW: "你在 Discord 上的生活管理助手。",
     repo: "lumina",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: false,
   },
   {
@@ -50,7 +50,7 @@ export const projects: Project[] = [
     description: "A service for the game Wuthering Waves, a big project collaborated with other devs.",
     descriptionZhTW: "與其他開發者合作的一個大型項目，這是一個為遊戲《鳴潮》設計的服務。",
     repo: "Wuthery",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: false,
   },
   {
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     description: "A small bot with anime image searching features derived from Shenhe.",
     descriptionZhTW: "一個衍生自 Shenhe 的小型機器人，具有動漫圖片搜索功能。",
     repo: "layla",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: false,
   },
   {
@@ -66,7 +66,7 @@ export const projects: Project[] = [
     description: "A multi-purpose Discord bot that I contributed a small part of.",
     descriptionZhTW: "一個多功能的 Discord 機器人，我貢獻了一小部分。",
     repo: "Sugari-Bot",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: false,
   },
   {
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     description: "Image sharing network implemented with Discord bot, made for a friend.",
     descriptionZhTW: "為朋友製作的基於 Discord 機器人實現的圖片分享網路。",
     repo: "guoba-network",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: false,
   },
   {
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     description: "Discord bot for creating advanced and descriptive role panels easily.",
     descriptionZhTW: "輕鬆製作炫酷的身份組面板。",
     repo: "roler",
-    tags: ["discord", "python", "bot"],
+    tags: ["discord-bot", "python"],
     featured: true,
     url: "https://roler.seria.moe",
   },
@@ -255,6 +255,14 @@ export const projects: Project[] = [
     featured: false,
   },
   {
+    name: "no-scams",
+    description: "Discord bot for detecting and deleting scam messages by pattern recognition.",
+    descriptionZhTW: "通過模式識別檢測和刪除詐騙訊息的 Discord 機器人。",
+    repo: "no-scams",
+    tags: ["python", "discord-bot"],
+    featured: false,
+  },
+  {
     name: "Mobile01 Scrape",
     description: "Web scraping for Mobile01.",
     descriptionZhTW: "Mobile01 網頁爬蟲。",
@@ -311,10 +319,10 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    name: "zzz-guides",
+    name: "szgf",
     description: "ZZZ character guides and the SZGF standard.",
     descriptionZhTW: "絕區零角色攻略，內含 SZGF（標準化絕區零攻略格式）規範。",
-    repo: "zzz-guides",
+    repo: "szgf",
     tags: ["guides"],
     featured: false,
   },
@@ -347,7 +355,7 @@ export const projects: Project[] = [
     description: "A LINE bot that notifies you when a company makes an announcement.",
     descriptionZhTW: "當公司發布重大訊息時通知你的 LINE 機器人。",
     repo: "news-notify",
-    tags: ["line", "bot", "python"],
+    tags: ["line-bot", "python"],
     featured: false,
   },
   {
@@ -355,7 +363,7 @@ export const projects: Project[] = [
     description: "A Line bot that notifies you when a company releases their revenue report.",
     descriptionZhTW: "當公司發布營收報告時通知你的 LINE 機器人。",
     repo: "company-revenue-notifier",
-    tags: ["line", "bot", "python"],
+    tags: ["line-bot", "python"],
     featured: false,
   },
   {
@@ -363,7 +371,7 @@ export const projects: Project[] = [
     description: "Allows you to buy stocks through LINE.",
     descriptionZhTW: "允許你通過 LINE 購買股票。",
     repo: "stock-buyer",
-    tags: ["line", "bot", "python"],
+    tags: ["line-bot", "python"],
     featured: false,
   },
   {
@@ -371,7 +379,7 @@ export const projects: Project[] = [
     description: "Tracks Momo products and notify you when they are on sale.",
     descriptionZhTW: "追蹤 momo 商品並在其打折時通知你。",
     repo: "momo-tracker",
-    tags: ["line", "bot", "python"],
+    tags: ["line-bot", "python"],
     featured: false,
   },
   {
@@ -379,7 +387,7 @@ export const projects: Project[] = [
     description: "Sample restaurant LINE bot.",
     descriptionZhTW: "LINE 餐廳機器人示例。",
     repo: "RestaurantBot",
-    tags: ["line", "bot", "python"],
+    tags: ["line-bot", "python"],
     featured: false,
   },
   {
@@ -387,7 +395,7 @@ export const projects: Project[] = [
     description: "Compare prices of Burberry products between Taiwan and Japan.",
     descriptionZhTW: "比較台灣和日本 Burberry 產品價格。",
     repo: "BurberryLineBot",
-    tags: ["line", "bot", "python"],
+    tags: ["line-bot", "python"],
     featured: false,
   },
   {
