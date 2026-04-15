@@ -132,7 +132,7 @@ export const projects: Project[] = [
     descriptionZhTW: "HoYoLAB/米游社 API 的異步封裝，我是主要貢獻者。",
     repo: "genshin.py",
     tags: ["python", "wrapper"],
-    featured: false,
+    featured: true,
   },
   {
     name: "line.py",
@@ -404,14 +404,6 @@ export const projects: Project[] = [
     descriptionZhTW: "一個使用 Shioaji 自動交易可轉換債券的腳本。",
     repo: "cb-auto-trade",
     tags: ["python", "stocks"],
-    featured: false,
-  },
-  {
-    name: "seria-api",
-    description: "API for Seria's projects to connect to.",
-    descriptionZhTW: "Seria 的項目連接用的 API。",
-    repo: "seria-api",
-    tags: ["python", "api", "fastapi"],
     featured: false,
   },
 ];
