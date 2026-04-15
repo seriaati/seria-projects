@@ -29,7 +29,7 @@ export const translations = {
     projects: {
       eyebrow: "All work",
       title: "Projects",
-      sub: "A complete archive of things I've built — tools, experiments, and everything in between.",
+      sub: "A curated list of things I've built.",
       searchPlaceholder: "Search projects…",
       searchAriaLabel: "Search projects",
       filterAriaLabel: "Filter by tag",

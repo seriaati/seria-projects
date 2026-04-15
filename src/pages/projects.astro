@@ -7,7 +7,10 @@ import { fetchStars } from "../lib/github";
 const starsMap = await fetchStars(projects.map((p) => p.repo));
 ---
 
-<Layout title="Projects — Seria" description="All projects by Seria. Searchable and filterable by tag.">
+<Layout
+  title="Projects — Seria"
+  description="All projects by Seria. Searchable and filterable by tag."
+>
   <main>
     <div class="page-header">
       <div class="header-inner">
@@ -17,7 +20,7 @@ const starsMap = await fetchStars(projects.map((p) => p.repo));
         </div>
         <h1 class="page-title" data-i18n="projects.title">Projects</h1>
         <p class="page-sub" data-i18n="projects.sub">
-          A complete archive of things I've built — tools, experiments, and everything in between.
+          A curated list of things I've built.
         </p>
       </div>
     </div>
@@ -34,7 +37,8 @@ const starsMap = await fetchStars(projects.map((p) => p.repo));
   }
 
   .page-header {
-    padding: clamp(5rem, 10vh, 7rem) clamp(1.5rem, 8vw, 7rem) clamp(3rem, 5vh, 4rem);
+    padding: clamp(5rem, 10vh, 7rem) clamp(1.5rem, 8vw, 7rem)
+      clamp(3rem, 5vh, 4rem);
     border-bottom: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
     background: var(--paper-warm);
   }
