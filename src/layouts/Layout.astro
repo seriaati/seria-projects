@@ -1,0 +1,398 @@
+---
+import logoBlack from "../assets/logoBlack.png";
+import logoWhite from "../assets/logoWhite.png";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "Seria's Projects", description = "A showcase of projects by Seria." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Birthstone&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Caveat:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="nav-logo">
+        <img src={logoBlack.src} alt="Seria" class="logo-light" height="32" />
+        <img src={logoWhite.src} alt="Seria" class="logo-dark" height="32" />
+      </a>
+      <div class="nav-links">
+        <a href="/" data-i18n="nav.home">Home</a>
+        <a href="/projects" data-i18n="nav.projects">Projects</a>
+        <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+          <span id="lang-toggle-label">中文</span>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+    <slot />
+    <footer>
+      <p>© {new Date().getFullYear()} Seria. <span data-i18n="footer.crafted">Crafted with care.</span></p>
+    </footer>
+  </body>
+</html>
+
+<script is:inline>
+  (function () {
+    const stored = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const dark = stored === "dark" || (!stored && prefersDark);
+    if (dark) document.documentElement.classList.add("dark");
+  })();
+</script>
+
+<script is:inline>
+  (function () {
+    const TRANSLATIONS = {
+      en: {
+        "nav.home": "Home",
+        "nav.projects": "Projects",
+        "footer.crafted": "Crafted with care.",
+        "featured.eyebrow": "Selected work",
+        "featured.title": "Featured Projects",
+        "featured.viewAll": "View all projects",
+        "contact.eyebrow": "Get in touch",
+        "contact.title": "Let\u2019s build",
+        "contact.titleEm": "something together",
+        "contact.body": "Open to freelance projects, collaborations, and interesting conversations. If you have an idea worth building, I\u2019d love to hear about it.",
+        "contact.freelanceLabel": "Freelance",
+        "projects.eyebrow": "All work",
+        "projects.title": "Projects",
+        "projects.sub": "A complete archive of things I\u2019ve built \u2014 tools, experiments, and everything in between.",
+        "projects.searchPlaceholder": "Search projects\u2026",
+        "projects.searchAriaLabel": "Search projects",
+        "projects.filterAriaLabel": "Filter by tag",
+        "projects.tagAll": "All",
+        "projects.emptyTitle": "No projects found",
+        "projects.emptySub": "Try a different search term or tag.",
+        "lang.toggle": "\u4e2d\u6587",
+      },
+      "zh-TW": {
+        "nav.home": "\u9996\u9801",
+        "nav.projects": "\u5c08\u6848",
+        "footer.crafted": "\u7528\u5fc3\u6253\u9020\u3002",
+        "featured.eyebrow": "\u7cbe\u9078\u4f5c\u54c1",
+        "featured.title": "\u7cbe\u9078\u5c08\u6848",
+        "featured.viewAll": "\u67e5\u770b\u6240\u6709\u5c08\u6848",
+        "contact.eyebrow": "\u806f\u7d61\u6211",
+        "contact.title": "\u4e00\u8d77\u6253\u9020",
+        "contact.titleEm": "\u6709\u610f\u7fa9\u7684\u4f5c\u54c1",
+        "contact.body": "\u6b61\u8fce\u81ea\u7531\u63a5\u6848\u3001\u5408\u4f5c\u63d0\u6848\uff0c\u6216\u53ea\u662f\u804a\u804a\u6709\u8da3\u7684\u60f3\u6cd5\u3002\u5982\u679c\u4f60\u6709\u5024\u5f97\u5be6\u73fe\u7684\u9ede\u5b50\uff0c\u6211\u5f88\u6a02\u610f\u8046\u807d\u3002",
+        "contact.freelanceLabel": "\u81ea\u7531\u63a5\u6848",
+        "projects.eyebrow": "\u6240\u6709\u4f5c\u54c1",
+        "projects.title": "\u5c08\u6848\u5217\u8868",
+        "projects.sub": "\u6211\u6240\u5efa\u7acb\u7684\u5b8c\u6574\u4f5c\u54c1\u96c6\u2014\u2014\u5de5\u5177\u3001\u5be6\u9a57\uff0c\u4ee5\u53ca\u5404\u7a2e\u5617\u8a66\u3002",
+        "projects.searchPlaceholder": "\u641c\u5c0b\u5c08\u6848\u2026",
+        "projects.searchAriaLabel": "\u641c\u5c0b\u5c08\u6848",
+        "projects.filterAriaLabel": "\u4f9d\u6a19\u7c64\u7be9\u9078",
+        "projects.tagAll": "\u5168\u90e8",
+        "projects.emptyTitle": "\u627e\u4e0d\u5230\u5c08\u6848",
+        "projects.emptySub": "\u8acb\u5617\u8a66\u4e0d\u540c\u7684\u641c\u5c0b\u8a5e\u6216\u6a19\u7c64\u3002",
+        "lang.toggle": "English",
+      },
+    };
+
+    function detectLocale() {
+      const stored = localStorage.getItem("locale");
+      if (stored === "en" || stored === "zh-TW") return stored;
+      const browser = navigator.language || "";
+      if (browser.startsWith("zh")) return "zh-TW";
+      return "en";
+    }
+
+    function applyLocale(locale) {
+      const t = TRANSLATIONS[locale];
+      document.documentElement.lang = locale;
+      localStorage.setItem("locale", locale);
+
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        const key = el.getAttribute("data-i18n");
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      document.querySelectorAll(".card-description").forEach(function (el) {
+        const text = locale === "zh-TW"
+          ? el.getAttribute("data-description-zh-tw")
+          : el.getAttribute("data-description-en");
+        if (text) el.textContent = text;
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (t[key] !== undefined) el.setAttribute("placeholder", t[key]);
+      });
+
+      document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+        const key = el.getAttribute("data-i18n-aria");
+        if (t[key] !== undefined) el.setAttribute("aria-label", t[key]);
+      });
+
+      const toggleLabel = document.getElementById("lang-toggle-label");
+      if (toggleLabel) toggleLabel.textContent = t["lang.toggle"];
+
+      const countEl = document.getElementById("results-count");
+      if (countEl) {
+        const n = parseInt(countEl.getAttribute("data-count") || "0", 10);
+        countEl.textContent = locale === "zh-TW" ? n + " \u500b\u5c08\u6848" : n + " project" + (n !== 1 ? "s" : "");
+      }
+    }
+
+    window.__applyLocale = applyLocale;
+    window.__currentLocale = detectLocale();
+    applyLocale(window.__currentLocale);
+  })();
+</script>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById("theme-toggle")!;
+
+  function applyTheme(dark: boolean) {
+    root.classList.toggle("dark", dark);
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  }
+
+  btn.addEventListener("click", () => {
+    applyTheme(!root.classList.contains("dark"));
+  });
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (!localStorage.getItem("theme")) applyTheme(e.matches);
+  });
+
+  const langBtn = document.getElementById("lang-toggle")!;
+  langBtn.addEventListener("click", () => {
+    const current = localStorage.getItem("locale") || (window as any).__currentLocale || "en";
+    const next = current === "en" ? "zh-TW" : "en";
+    (window as any).__applyLocale(next);
+  });
+</script>
+
+<style is:global>
+  :root {
+    --ink: oklch(18% 0.02 60);
+    --ink-soft: oklch(35% 0.02 60);
+    --ink-muted: oklch(55% 0.015 60);
+    --paper: oklch(97% 0.01 80);
+    --paper-warm: oklch(94% 0.015 80);
+    --paper-deep: oklch(90% 0.02 75);
+    --accent: oklch(52% 0.12 30);
+    --accent-light: oklch(72% 0.08 30);
+    --accent-pale: oklch(92% 0.04 60);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "DM Sans", system-ui, sans-serif;
+    --script: "Birthstone", cursive;
+  }
+
+  :root.dark {
+    --ink: oklch(92% 0.01 80);
+    --ink-soft: oklch(72% 0.01 80);
+    --ink-muted: oklch(52% 0.01 80);
+    --paper: oklch(14% 0.01 60);
+    --paper-warm: oklch(17% 0.012 60);
+    --paper-deep: oklch(20% 0.015 60);
+    --accent: oklch(68% 0.12 30);
+    --accent-light: oklch(78% 0.08 30);
+    --accent-pale: oklch(22% 0.04 40);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--sans);
+    background-color: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
+    background: color-mix(in oklch, var(--paper) 85%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-logo:hover {
+    opacity: 0.7;
+  }
+
+  .nav-logo img {
+    display: block;
+  }
+
+  .logo-dark { display: none; }
+
+  .dark .logo-light { display: none; }
+  .dark .logo-dark { display: block; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--ink);
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  footer {
+    margin-top: auto;
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 0.8125rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+  }
+
+  main {
+    flex: 1;
+  }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    transition: color 0.2s ease;
+    line-height: 0;
+  }
+
+  .theme-toggle:hover {
+    color: var(--ink);
+  }
+
+  .lang-toggle {
+    background: none;
+    border: 1px solid color-mix(in oklch, var(--ink) 18%, transparent);
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.625rem;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .lang-toggle:hover {
+    color: var(--ink);
+    border-color: color-mix(in oklch, var(--ink) 35%, transparent);
+  }
+
+  .icon-moon { display: none; }
+
+  .dark .icon-sun { display: none; }
+  .dark .icon-moon { display: block; }
+
+  @media (max-width: 640px) {
+    .nav-links {
+      gap: 1.5rem;
+    }
+  }
+</style>

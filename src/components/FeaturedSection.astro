@@ -1,0 +1,106 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import { featuredProjects } from "../data/projects";
+---
+
+<section class="featured" id="featured">
+  <div class="section-header">
+    <div class="section-label">
+      <span class="label-line"></span>
+      <span data-i18n="featured.eyebrow">Selected work</span>
+    </div>
+    <h2 class="section-title" data-i18n="featured.title">Featured Projects</h2>
+  </div>
+
+  <div class="projects-grid">
+    {featuredProjects.map((project, i) => (
+      <ProjectCard project={project} index={i} />
+    ))}
+  </div>
+
+  <div class="section-footer">
+    <a href="/projects" class="all-projects-link">
+      <span data-i18n="featured.viewAll">View all projects</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .featured {
+    padding: clamp(5rem, 10vh, 8rem) clamp(1.5rem, 8vw, 7rem);
+    background: var(--paper-warm);
+    border-top: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+    border-bottom: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+  }
+
+  .section-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .label-line {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .section-label span:last-child {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 1.5px;
+  }
+
+  .section-footer {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .all-projects-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s ease, gap 0.2s ease;
+    padding-bottom: 2px;
+    border-bottom: 1px solid color-mix(in oklch, var(--ink) 20%, transparent);
+  }
+
+  .all-projects-link:hover {
+    color: var(--accent);
+    gap: 0.875rem;
+    border-bottom-color: var(--accent);
+  }
+</style>

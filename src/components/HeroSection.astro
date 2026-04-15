@@ -1,0 +1,387 @@
+---
+
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-title-wrap" aria-label="Seria's Projects">
+      <svg
+        class="title-svg"
+        viewBox="0 0 600 340"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <text
+          class="title-svg-text title-seria"
+          x="300"
+          y="155"
+          text-anchor="middle">Seria's</text
+        >
+        <text
+          class="title-svg-text title-projects"
+          x="300"
+          y="320"
+          text-anchor="middle">Projects</text
+        >
+      </svg>
+    </div>
+  </div>
+
+  <button
+    class="scroll-hint"
+    aria-label="Scroll to next section"
+    id="scroll-hint-btn"
+  >
+    <svg
+      class="scroll-arrow"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 5v14M5 12l7 7 7-7"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
+
+  <div class="hero-decoration" aria-hidden="true">
+    <div class="deco-circle"></div>
+    <div class="deco-line deco-line-1"></div>
+    <div class="deco-line deco-line-2"></div>
+    <div class="deco-dot deco-dot-1"></div>
+    <div class="deco-dot deco-dot-2"></div>
+    <div class="deco-dot deco-dot-3"></div>
+  </div>
+</section>
+
+<script>
+  function measureAndAnimate() {
+    const svg = document.querySelector<SVGSVGElement>(".title-svg");
+    const seria = document.querySelector<SVGTextElement>(".title-seria");
+    const projects = document.querySelector<SVGTextElement>(".title-projects");
+    if (!svg || !seria || !projects) return;
+
+    const seriaBox = seria.getBBox();
+    const projectsBox = projects.getBBox();
+    const padding = 20;
+    const totalWidth =
+      Math.max(seriaBox.width, projectsBox.width) + padding * 2;
+    const totalHeight = projectsBox.y + projectsBox.height + padding;
+
+    const cx = totalWidth / 2;
+    seria.setAttribute("x", String(cx));
+    projects.setAttribute("x", String(cx));
+
+    svg.setAttribute("viewBox", `0 0 ${totalWidth} ${totalHeight}`);
+
+    [seria, projects].forEach((el) => {
+      const len = el.getComputedTextLength();
+      el.style.strokeDasharray = String(len);
+      el.style.strokeDashoffset = String(len);
+    });
+
+    seria.classList.add("animate-seria");
+    projects.classList.add("animate-projects");
+  }
+
+  if (document.fonts) {
+    document.fonts.ready.then(measureAndAnimate);
+  } else {
+    window.addEventListener("load", measureAndAnimate);
+  }
+
+  document.getElementById("scroll-hint-btn")?.addEventListener("click", () => {
+    document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" });
+  });
+
+  const hero = document.querySelector<HTMLElement>(".hero");
+  const titleWrap = document.querySelector<HTMLElement>(".hero-title-wrap");
+  const decoCircle = document.querySelector<HTMLElement>(".deco-circle");
+  const decoLine1 = document.querySelector<HTMLElement>(".deco-line-1");
+  const decoLine2 = document.querySelector<HTMLElement>(".deco-line-2");
+  const decoDot1 = document.querySelector<HTMLElement>(".deco-dot-1");
+  const decoDot2 = document.querySelector<HTMLElement>(".deco-dot-2");
+  const decoDot3 = document.querySelector<HTMLElement>(".deco-dot-3");
+  if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // skip cursor effects
+  } else {
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    hero.addEventListener("mousemove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+      mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+    });
+
+    hero.addEventListener("mouseleave", () => {
+      mouseX = 0;
+      mouseY = 0;
+    });
+
+    function lerp(a: number, b: number, t: number) {
+      return a + (b - a) * t;
+    }
+
+    function tick() {
+      currentX = lerp(currentX, mouseX, 0.06);
+      currentY = lerp(currentY, mouseY, 0.06);
+
+      if (titleWrap) {
+        titleWrap.style.transform = `translate(${currentX * 18}px, ${currentY * 12}px)`;
+      }
+
+      if (decoCircle) {
+        decoCircle.style.setProperty("--cx", `${currentX * -28}px`);
+        decoCircle.style.setProperty("--cy", `${currentY * -20}px`);
+      }
+
+      if (decoLine1) {
+        decoLine1.style.setProperty("--cx", `${currentX * 14}px`);
+        decoLine1.style.setProperty("--cy", `${currentY * 22}px`);
+      }
+
+      if (decoLine2) {
+        decoLine2.style.setProperty("--cx", `${currentX * 20}px`);
+        decoLine2.style.setProperty("--cy", `${currentY * 10}px`);
+      }
+
+      if (decoDot1) {
+        decoDot1.style.setProperty("--cx", `${currentX * 30}px`);
+        decoDot1.style.setProperty("--cy", `${currentY * 24}px`);
+      }
+
+      if (decoDot2) {
+        decoDot2.style.setProperty("--cx", `${currentX * -22}px`);
+        decoDot2.style.setProperty("--cy", `${currentY * 18}px`);
+      }
+
+      if (decoDot3) {
+        decoDot3.style.setProperty("--cx", `${currentX * 16}px`);
+        decoDot3.style.setProperty("--cy", `${currentY * -26}px`);
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    tick();
+  }
+</script>
+
+<style>
+  .hero {
+    height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    padding: 0 clamp(1rem, 4vw, 3rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .hero-title-wrap {
+    width: 100%;
+    will-change: transform;
+  }
+
+  .title-svg {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    overflow: visible;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .title-svg-text {
+    font-family: var(--script);
+    font-size: 160px;
+    fill: transparent;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .title-seria {
+    stroke: var(--ink);
+  }
+
+  .title-projects {
+    stroke: var(--accent);
+  }
+
+  /* After stroke draws, fill fades in */
+  .title-seria.animate-seria {
+    animation:
+      stroke-draw 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards,
+      fill-ink 0.5s ease 1.6s forwards;
+  }
+
+  .title-projects.animate-projects {
+    animation:
+      stroke-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards,
+      fill-accent 0.5s ease 2.2s forwards;
+  }
+
+  @keyframes stroke-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fill-ink {
+    to {
+      fill: var(--ink);
+    }
+  }
+
+  @keyframes fill-accent {
+    to {
+      fill: var(--accent);
+    }
+  }
+
+  /* Decorative */
+  .hero-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .deco-circle {
+    position: absolute;
+    right: -8rem;
+    top: 50%;
+    translate: 0 -50%;
+    transform: translate(var(--cx, 0px), var(--cy, 0px));
+    width: clamp(20rem, 35vw, 42rem);
+    height: clamp(20rem, 35vw, 42rem);
+    border-radius: 50%;
+    border: 1px solid color-mix(in oklch, var(--ink) 6%, transparent);
+    opacity: 0;
+    animation: fade-in 1.5s ease 0.3s forwards;
+  }
+
+  .deco-line {
+    position: absolute;
+    background: color-mix(in oklch, var(--accent) 15%, transparent);
+    opacity: 0;
+    animation: fade-in 1s ease 1s forwards;
+  }
+
+  .deco-line-1 {
+    width: 1px;
+    height: 30vh;
+    right: clamp(8rem, 20vw, 22rem);
+    top: 0;
+    transform: translate(var(--cx, 0px), var(--cy, 0px));
+    animation: fade-in 1s ease 1s forwards;
+  }
+
+  .deco-line-2 {
+    width: 20vw;
+    height: 1px;
+    right: 0;
+    bottom: 25%;
+    transform: translate(var(--cx, 0px), var(--cy, 0px));
+    animation: fade-in 1s ease 1s forwards;
+  }
+
+  .deco-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0;
+    animation: fade-in 0.5s ease forwards;
+  }
+
+  .deco-dot-1 {
+    width: 5px;
+    height: 5px;
+    right: clamp(8rem, 20vw, 22rem);
+    top: 30vh;
+    transform: translate(var(--cx, 0px), var(--cy, 0px));
+    animation: fade-in 0.5s ease 1.2s forwards;
+  }
+
+  .deco-dot-2 {
+    width: 3px;
+    height: 3px;
+    right: calc(clamp(8rem, 20vw, 22rem) - 40px);
+    top: 30vh;
+    transform: translate(var(--cx, 0px), var(--cy, 0px));
+    animation: fade-in 0.5s ease 1.4s forwards;
+  }
+
+  .deco-dot-3 {
+    width: 8px;
+    height: 8px;
+    right: 20vw;
+    bottom: 25%;
+    background: color-mix(in oklch, var(--accent) 40%, transparent);
+    transform: translate(var(--cx, 0px), var(--cy, 0px));
+    animation: fade-in 0.5s ease 1.6s forwards;
+  }
+
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    animation: fade-in 0.6s ease 2.8s forwards;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 20px;
+    color: color-mix(in oklch, var(--ink) 35%, transparent);
+    animation: scroll-bounce 2s ease-in-out 3.4s infinite;
+  }
+
+  @keyframes scroll-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 0 0.5rem;
+    }
+
+    .title-svg {
+      max-width: 100%;
+    }
+  }
+</style>
