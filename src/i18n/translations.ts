@@ -67,7 +67,7 @@ export const translations = {
     projects: {
       eyebrow: "所有作品",
       title: "專案列表",
-      sub: "我所建立的完整作品集——工具、實驗，以及各種嘗試。",
+      sub: "我精心挑選的一些作品。",
       searchPlaceholder: "搜尋專案…",
       searchAriaLabel: "搜尋專案",
       filterAriaLabel: "依標籤篩選",

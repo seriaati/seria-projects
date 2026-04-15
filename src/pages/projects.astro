@@ -6,14 +6,11 @@ import { fetchStars } from "../lib/github";
 
 const starsMap = await fetchStars(projects.map((p) => p.repo));
 const sortedProjects = [...projects].sort(
-  (a, b) => (starsMap[b.repo] ?? 0) - (starsMap[a.repo] ?? 0)
+  (a, b) => (starsMap[b.repo] ?? 0) - (starsMap[a.repo] ?? 0),
 );
 ---
 
-<Layout
-  title="Projects — Seria"
-  description="All projects by Seria. Searchable and filterable by tag."
->
+<Layout title="Projects — Seria" description="All projects by Seria.">
   <main>
     <div class="page-header">
       <div class="header-inner">
