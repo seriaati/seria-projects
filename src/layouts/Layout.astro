@@ -14,7 +14,10 @@ const {
   image = "/og-image.png",
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site ?? Astro.url.origin,
+);
 const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
 ---
 
@@ -57,26 +60,75 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
       <div class="nav-links">
         <a href="/" data-i18n="nav.home">Home</a>
         <a href="/projects" data-i18n="nav.projects">Projects</a>
-        <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+        <button
+          class="lang-toggle"
+          id="lang-toggle"
+          aria-label="Switch language"
+        >
           <span id="lang-toggle-label">中文</span>
         </button>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle dark mode"
+        >
+          <svg
+            class="icon-sun"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line><line
+              x1="12"
+              y1="21"
+              x2="12"
+              y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line
+              x1="18.36"
+              y1="18.36"
+              x2="19.78"
+              y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line><line
+              x1="21"
+              y1="12"
+              x2="23"
+              y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line
+              x1="18.36"
+              y1="5.64"
+              x2="19.78"
+              y2="4.22"></line>
           </svg>
-          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          <svg
+            class="icon-moon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
       </div>
     </nav>
     <slot />
     <footer>
-      <p>© {new Date().getFullYear()} Seria. <span data-i18n="footer.crafted">Crafted with care.</span></p>
+      <p>
+        © {new Date().getFullYear()} Seria. <span data-i18n="footer.crafted"
+          >Crafted with care.</span>
+      </p>
     </footer>
   </body>
 </html>
@@ -84,7 +136,9 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
 <script is:inline>
   (function () {
     const stored = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
     const dark = stored === "dark" || (!stored && prefersDark);
     if (dark) document.documentElement.classList.add("dark");
   })();
@@ -103,11 +157,13 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
         "contact.eyebrow": "Get in touch",
         "contact.title": "Let\u2019s build",
         "contact.titleEm": "something together",
-        "contact.body": "Open to freelance projects, collaborations, and interesting conversations. If you have an idea worth building, I\u2019d love to hear about it.",
+        "contact.body":
+          "Open to freelance projects, collaborations, and interesting conversations. If you have an idea worth building, I\u2019d love to hear about it.",
         "contact.freelanceLabel": "Freelance",
         "projects.eyebrow": "All work",
         "projects.title": "Projects",
-        "projects.sub": "A complete archive of things I\u2019ve built \u2014 tools, experiments, and everything in between.",
+        "projects.sub":
+          "A complete archive of things I\u2019ve built \u2014 tools, experiments, and everything in between.",
         "projects.searchPlaceholder": "Search projects\u2026",
         "projects.searchAriaLabel": "Search projects",
         "projects.filterAriaLabel": "Filter by tag",
@@ -126,17 +182,20 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
         "contact.eyebrow": "\u806f\u7d61\u6211",
         "contact.title": "\u4e00\u8d77\u6253\u9020",
         "contact.titleEm": "\u6709\u610f\u7fa9\u7684\u4f5c\u54c1",
-        "contact.body": "\u6b61\u8fce\u81ea\u7531\u63a5\u6848\u3001\u5408\u4f5c\u63d0\u6848\uff0c\u6216\u53ea\u662f\u804a\u804a\u6709\u8da3\u7684\u60f3\u6cd5\u3002\u5982\u679c\u4f60\u6709\u5024\u5f97\u5be6\u73fe\u7684\u9ede\u5b50\uff0c\u6211\u5f88\u6a02\u610f\u8046\u807d\u3002",
+        "contact.body":
+          "\u6b61\u8fce\u81ea\u7531\u63a5\u6848\u3001\u5408\u4f5c\u63d0\u6848\uff0c\u6216\u53ea\u662f\u804a\u804a\u6709\u8da3\u7684\u60f3\u6cd5\u3002\u5982\u679c\u4f60\u6709\u5024\u5f97\u5be6\u73fe\u7684\u9ede\u5b50\uff0c\u6211\u5f88\u6a02\u610f\u8046\u807d\u3002",
         "contact.freelanceLabel": "\u81ea\u7531\u63a5\u6848",
         "projects.eyebrow": "\u6240\u6709\u4f5c\u54c1",
         "projects.title": "\u5c08\u6848\u5217\u8868",
-        "projects.sub": "\u6211\u6240\u5efa\u7acb\u7684\u5b8c\u6574\u4f5c\u54c1\u96c6\u2014\u2014\u5de5\u5177\u3001\u5be6\u9a57\uff0c\u4ee5\u53ca\u5404\u7a2e\u5617\u8a66\u3002",
+        "projects.sub":
+          "\u6211\u6240\u5efa\u7acb\u7684\u5b8c\u6574\u4f5c\u54c1\u96c6\u2014\u2014\u5de5\u5177\u3001\u5be6\u9a57\uff0c\u4ee5\u53ca\u5404\u7a2e\u5617\u8a66\u3002",
         "projects.searchPlaceholder": "\u641c\u5c0b\u5c08\u6848\u2026",
         "projects.searchAriaLabel": "\u641c\u5c0b\u5c08\u6848",
         "projects.filterAriaLabel": "\u4f9d\u6a19\u7c64\u7be9\u9078",
         "projects.tagAll": "\u5168\u90e8",
         "projects.emptyTitle": "\u627e\u4e0d\u5230\u5c08\u6848",
-        "projects.emptySub": "\u8acb\u5617\u8a66\u4e0d\u540c\u7684\u641c\u5c0b\u8a5e\u6216\u6a19\u7c64\u3002",
+        "projects.emptySub":
+          "\u8acb\u5617\u8a66\u4e0d\u540c\u7684\u641c\u5c0b\u8a5e\u6216\u6a19\u7c64\u3002",
         "lang.toggle": "English",
       },
     };
@@ -160,16 +219,19 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
       });
 
       document.querySelectorAll(".card-description").forEach(function (el) {
-        const text = locale === "zh-TW"
-          ? el.getAttribute("data-description-zh-tw")
-          : el.getAttribute("data-description-en");
+        const text =
+          locale === "zh-TW"
+            ? el.getAttribute("data-description-zh-tw")
+            : el.getAttribute("data-description-en");
         if (text) el.textContent = text;
       });
 
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
-        const key = el.getAttribute("data-i18n-placeholder");
-        if (t[key] !== undefined) el.setAttribute("placeholder", t[key]);
-      });
+      document
+        .querySelectorAll("[data-i18n-placeholder]")
+        .forEach(function (el) {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (t[key] !== undefined) el.setAttribute("placeholder", t[key]);
+        });
 
       document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
         const key = el.getAttribute("data-i18n-aria");
@@ -182,7 +244,10 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
       const countEl = document.getElementById("results-count");
       if (countEl) {
         const n = parseInt(countEl.getAttribute("data-count") || "0", 10);
-        countEl.textContent = locale === "zh-TW" ? n + " \u500b\u5c08\u6848" : n + " project" + (n !== 1 ? "s" : "");
+        countEl.textContent =
+          locale === "zh-TW"
+            ? n + " \u500b\u5c08\u6848"
+            : n + " project" + (n !== 1 ? "s" : "");
       }
     }
 
@@ -205,13 +270,16 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     applyTheme(!root.classList.contains("dark"));
   });
 
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    if (!localStorage.getItem("theme")) applyTheme(e.matches);
-  });
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) applyTheme(e.matches);
+    });
 
   const langBtn = document.getElementById("lang-toggle")!;
   langBtn.addEventListener("click", () => {
-    const current = localStorage.getItem("locale") || (window as any).__currentLocale || "en";
+    const current =
+      localStorage.getItem("locale") || (window as any).__currentLocale || "en";
     const next = current === "en" ? "zh-TW" : "en";
     (window as any).__applyLocale(next);
   });
@@ -245,7 +313,9 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     --accent-pale: oklch(22% 0.04 40);
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -271,8 +341,7 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     content: "";
     position: fixed;
     inset: 0;
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
     opacity: 0.6;
@@ -309,10 +378,16 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     display: block;
   }
 
-  .logo-dark { display: none; }
+  .logo-dark {
+    display: none;
+  }
 
-  .dark .logo-light { display: none; }
-  .dark .logo-dark { display: block; }
+  .dark .logo-light {
+    display: none;
+  }
+  .dark .logo-dark {
+    display: block;
+  }
 
   .nav-links {
     display: flex;
@@ -396,7 +471,9 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     font-size: 0.75rem;
     letter-spacing: 0.08em;
     padding: 0.25rem 0.625rem;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
     line-height: 1;
     vertical-align: middle;
   }
@@ -406,10 +483,16 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     border-color: color-mix(in oklch, var(--ink) 35%, transparent);
   }
 
-  .icon-moon { display: none; }
+  .icon-moon {
+    display: none;
+  }
 
-  .dark .icon-sun { display: none; }
-  .dark .icon-moon { display: block; }
+  .dark .icon-sun {
+    display: none;
+  }
+  .dark .icon-moon {
+    display: block;
+  }
 
   @media (max-width: 640px) {
     .nav-links {
