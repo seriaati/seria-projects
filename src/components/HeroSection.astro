@@ -78,15 +78,30 @@
 
     svg.setAttribute("viewBox", `0 0 ${totalWidth} ${totalHeight}`);
 
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     [seria, projects].forEach((el) => {
-      const len = el.getComputedTextLength();
-      el.style.strokeDasharray = String(len);
-      el.style.strokeDashoffset = String(len);
-      el.style.opacity = "1";
+      if (reducedMotion) {
+        el.style.opacity = "1";
+        el.style.strokeDasharray = "";
+        el.style.strokeDashoffset = "";
+      } else {
+        const len = el.getComputedTextLength();
+        el.style.strokeDasharray = String(len);
+        el.style.strokeDashoffset = String(len);
+        el.style.opacity = "1";
+      }
     });
 
-    seria.classList.add("animate-seria");
-    projects.classList.add("animate-projects");
+    if (!reducedMotion) {
+      seria.classList.add("animate-seria");
+      projects.classList.add("animate-projects");
+    } else {
+      seria.style.fill = "var(--ink)";
+      projects.style.fill = "var(--accent)";
+    }
   }
 
   if (document.fonts) {
@@ -115,24 +130,67 @@
     let currentX = 0;
     let currentY = 0;
 
-    hero.addEventListener("mousemove", (e) => {
-      const rect = hero.getBoundingClientRect();
-      mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-      mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-    });
+    const isTouchOnly = window.matchMedia(
+      "(hover: none) and (pointer: coarse)",
+    ).matches;
 
-    hero.addEventListener("mouseleave", () => {
-      mouseX = 0;
-      mouseY = 0;
-    });
+    if (isTouchOnly) {
+      const TILT_RANGE = 15;
+
+      function handleOrientation(e: DeviceOrientationEvent) {
+        if (e.gamma === null || e.beta === null) return;
+        mouseX = Math.max(-0.5, Math.min(0.5, e.gamma / (TILT_RANGE * 2)));
+        mouseY = Math.max(
+          -0.5,
+          Math.min(0.5, (e.beta - 45) / (TILT_RANGE * 1.2)),
+        );
+      }
+
+      if (
+        typeof DeviceOrientationEvent !== "undefined" &&
+        typeof (DeviceOrientationEvent as any).requestPermission === "function"
+      ) {
+        hero.addEventListener(
+          "click",
+          async () => {
+            try {
+              const permission = await (
+                DeviceOrientationEvent as any
+              ).requestPermission();
+              if (permission === "granted") {
+                window.addEventListener("deviceorientation", handleOrientation);
+              }
+            } catch {
+              // permission denied or unavailable
+            }
+          },
+          { once: true },
+        );
+      } else {
+        window.addEventListener("deviceorientation", handleOrientation);
+      }
+    } else {
+      hero.addEventListener("mousemove", (e) => {
+        const rect = hero.getBoundingClientRect();
+        mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+        mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+      });
+
+      hero.addEventListener("mouseleave", () => {
+        mouseX = 0;
+        mouseY = 0;
+      });
+    }
 
     function lerp(a: number, b: number, t: number) {
       return a + (b - a) * t;
     }
 
+    const lerpSpeed = isTouchOnly ? 0.1 : 0.06;
+
     function tick() {
-      currentX = lerp(currentX, mouseX, 0.06);
-      currentY = lerp(currentY, mouseY, 0.06);
+      currentX = lerp(currentX, mouseX, lerpSpeed);
+      currentY = lerp(currentY, mouseY, lerpSpeed);
 
       if (titleWrap) {
         titleWrap.style.transform = `translate(${currentX * 18}px, ${currentY * 12}px)`;
@@ -374,6 +432,20 @@
     }
     50% {
       transform: translateY(6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deco-circle,
+    .deco-line,
+    .deco-dot,
+    .scroll-hint {
+      animation: none;
+      opacity: 1;
+    }
+
+    .scroll-arrow {
+      animation: none;
     }
   }
 
