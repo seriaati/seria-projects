@@ -267,12 +267,6 @@ const githubUrl = `https://github.com/seriaati/${project.repo}`;
     align-self: center;
   }
 
-  @media (hover: hover) {
-    .github-link {
-      display: none;
-    }
-  }
-
   .icon-link {
     color: var(--ink-muted);
     transition: color 0.2s ease;
@@ -284,6 +278,12 @@ const githubUrl = `https://github.com/seriaati/${project.repo}`;
 
   .icon-link:hover {
     color: var(--ink);
+  }
+
+  @media (hover: hover) {
+    .github-link {
+      display: none;
+    }
   }
 
   .card-body {
