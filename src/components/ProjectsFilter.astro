@@ -6,17 +6,29 @@ import ProjectCard from "./ProjectCard.astro";
 interface Props {
   projects: Project[];
   starsMap?: Record<string, number>;
+  totalStars?: number;
 }
 
-const { projects, starsMap = {} } = Astro.props;
+const { projects, starsMap = {}, totalStars = 0 } = Astro.props;
 ---
 
 <div class="filter-root">
   <div class="filter-bar">
     <div class="search-wrap">
-      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"/>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      <svg
+        class="search-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
       <input
         id="project-search"
@@ -29,40 +41,70 @@ const { projects, starsMap = {} } = Astro.props;
       />
     </div>
 
-    <div class="tags-wrap" role="group" aria-label="Filter by tag" data-i18n-aria="projects.filterAriaLabel">
-      <button class="tag-btn active" data-tag="all" data-i18n="projects.tagAll">All</button>
-      {allTags.map((tag) => (
-        <button class="tag-btn" data-tag={tag}>{tag}</button>
-      ))}
+    <div
+      class="tags-wrap"
+      role="group"
+      aria-label="Filter by tag"
+      data-i18n-aria="projects.filterAriaLabel"
+    >
+      <button class="tag-btn active" data-tag="all" data-i18n="projects.tagAll"
+        >All</button
+      >
+      {
+        allTags.map((tag) => (
+          <button class="tag-btn" data-tag={tag}>
+            {tag}
+          </button>
+        ))
+      }
     </div>
   </div>
 
   <div class="results-meta" aria-live="polite">
-    <span id="results-count" data-count={projects.length}>{projects.length} projects</span>
+    <span
+      id="results-count"
+      data-count={projects.length}
+      data-stars={totalStars}
+      >{projects.length} projects{
+        totalStars > 0 ? `, ${totalStars.toLocaleString()} stars` : ""
+      }</span
+    >
   </div>
 
   <div class="projects-grid" id="projects-grid">
-    {projects.map((project, i) => (
-      <div
-        class="project-item"
-        data-name={project.name.toLowerCase()}
-        data-description={project.description.toLowerCase()}
-        data-description-zh-tw={(project.descriptionZhTW ?? project.description).toLowerCase()}
-        data-tags={project.tags.join(",")}
-      >
-        <ProjectCard project={project} index={i} stars={starsMap[project.repo]} />
-      </div>
-    ))}
+    {
+      projects.map((project, i) => (
+        <div
+          class="project-item"
+          data-name={project.name.toLowerCase()}
+          data-description={project.description.toLowerCase()}
+          data-description-zh-tw={(
+            project.descriptionZhTW ?? project.description
+          ).toLowerCase()}
+          data-tags={project.tags.join(",")}
+        >
+          <ProjectCard
+            project={project}
+            index={i}
+            stars={starsMap[project.repo]}
+          />
+        </div>
+      ))
+    }
   </div>
 
   <div class="empty-state" id="empty-state" hidden>
     <p class="empty-title" data-i18n="projects.emptyTitle">No projects found</p>
-    <p class="empty-sub" data-i18n="projects.emptySub">Try a different search term or tag.</p>
+    <p class="empty-sub" data-i18n="projects.emptySub">
+      Try a different search term or tag.
+    </p>
   </div>
 </div>
 
 <script>
-  const searchInput = document.getElementById("project-search") as HTMLInputElement;
+  const searchInput = document.getElementById(
+    "project-search",
+  ) as HTMLInputElement;
   const tagButtons = document.querySelectorAll<HTMLButtonElement>(".tag-btn");
   const items = document.querySelectorAll<HTMLElement>(".project-item");
   const countEl = document.getElementById("results-count")!;
@@ -75,16 +117,19 @@ const { projects, starsMap = {} } = Astro.props;
   function filter() {
     let visible = 0;
     let visibleIndex = 0;
-    const locale = (window as any).__currentLocale || localStorage.getItem("locale") || "en";
+    const locale =
+      (window as any).__currentLocale || localStorage.getItem("locale") || "en";
 
     items.forEach((item) => {
       const name = item.dataset.name ?? "";
-      const desc = locale === "zh-TW"
-        ? (item.dataset.descriptionZhTw ?? item.dataset.description ?? "")
-        : (item.dataset.description ?? "");
+      const desc =
+        locale === "zh-TW"
+          ? (item.dataset.descriptionZhTw ?? item.dataset.description ?? "")
+          : (item.dataset.description ?? "");
       const tags = item.dataset.tags ?? "";
 
-      const matchesTag = activeTag === "all" || tags.split(",").includes(activeTag);
+      const matchesTag =
+        activeTag === "all" || tags.split(",").includes(activeTag);
       const matchesSearch =
         searchQuery === "" ||
         name.includes(searchQuery) ||
@@ -103,10 +148,18 @@ const { projects, starsMap = {} } = Astro.props;
       }
     });
 
+    const stars = parseInt(countEl.getAttribute("data-stars") || "0", 10);
+    const starsText =
+      stars > 0
+        ? locale === "zh-TW"
+          ? `，${stars.toLocaleString()} 顆星星`
+          : `, ${stars.toLocaleString()} stars total`
+        : "";
     countEl.setAttribute("data-count", String(visible));
-    countEl.textContent = locale === "zh-TW"
-      ? `${visible} 個專案`
-      : `${visible} project${visible !== 1 ? "s" : ""}`;
+    countEl.textContent =
+      locale === "zh-TW"
+        ? `${visible} 個專案${starsText}`
+        : `${visible} project${visible !== 1 ? "s" : ""}${starsText}`;
     emptyState.hidden = visible > 0;
     grid.hidden = visible === 0;
   }
@@ -193,7 +246,10 @@ const { projects, starsMap = {} } = Astro.props;
     background: transparent;
     border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
     cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background 0.2s ease;
   }
 
   .tag-btn:hover {

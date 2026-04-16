@@ -5,6 +5,7 @@ import { projects } from "../data/projects";
 import { fetchStars } from "../lib/github";
 
 const starsMap = await fetchStars(projects.map((p) => p.repo));
+const totalStars = Object.values(starsMap).reduce((sum, n) => sum + n, 0);
 const sortedProjects = [...projects].sort(
   (a, b) => (starsMap[b.repo] ?? 0) - (starsMap[a.repo] ?? 0),
 );
@@ -26,7 +27,7 @@ const sortedProjects = [...projects].sort(
     </div>
 
     <div class="page-body">
-      <ProjectsFilter projects={sortedProjects} starsMap={starsMap} />
+      <ProjectsFilter projects={sortedProjects} starsMap={starsMap} totalStars={totalStars} />
     </div>
   </main>
 </Layout>

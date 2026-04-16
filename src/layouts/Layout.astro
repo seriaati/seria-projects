@@ -325,10 +325,17 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
       const countEl = document.getElementById("results-count");
       if (countEl) {
         const n = parseInt(countEl.getAttribute("data-count") || "0", 10);
+        const stars = parseInt(countEl.getAttribute("data-stars") || "0", 10);
+        const starsText =
+          stars > 0
+            ? locale === "zh-TW"
+              ? `，${stars.toLocaleString()}顆星星`
+              : `, ${stars.toLocaleString()} stars total`
+            : "";
         countEl.textContent =
           locale === "zh-TW"
-            ? n + " 個專案"
-            : n + " project" + (n !== 1 ? "s" : "");
+            ? n + " 個專案" + starsText
+            : n + " project" + (n !== 1 ? "s" : "") + starsText;
       }
     }
 
