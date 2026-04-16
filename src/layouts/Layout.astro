@@ -205,7 +205,8 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     <footer>
       <p>
         © {new Date().getFullYear()} Seria. <span data-i18n="footer.crafted"
-          >Crafted with care.</span>
+          >Crafted with care.</span
+        >
       </p>
     </footer>
   </body>
@@ -233,47 +234,44 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
         "featured.title": "Featured Projects",
         "featured.viewAll": "View all projects",
         "contact.eyebrow": "Get in touch",
-        "contact.title": "Let\u2019s build",
+        "contact.title": "Let's build",
         "contact.titleEm": "something together",
         "contact.body":
-          "Open to freelance projects, collaborations, and interesting conversations. If you have an idea worth building, I\u2019d love to hear about it.",
+          "Open to freelance projects, collaborations, and interesting conversations. If you have an idea worth building, I'd love to hear about it.",
         "contact.freelanceLabel": "Freelance",
         "projects.eyebrow": "All work",
         "projects.title": "Projects",
-        "projects.sub":
-          "A complete archive of things I\u2019ve built \u2014 tools, experiments, and everything in between.",
-        "projects.searchPlaceholder": "Search projects\u2026",
+        "projects.sub": "A curated list of projects I've built.",
+        "projects.searchPlaceholder": "Search projects…",
         "projects.searchAriaLabel": "Search projects",
         "projects.filterAriaLabel": "Filter by tag",
         "projects.tagAll": "All",
         "projects.emptyTitle": "No projects found",
         "projects.emptySub": "Try a different search term or tag.",
-        "lang.toggle": "\u4e2d\u6587",
+        "lang.toggle": "中文",
       },
       "zh-TW": {
-        "nav.home": "\u9996\u9801",
-        "nav.projects": "\u5c08\u6848",
-        "footer.crafted": "\u7528\u5fc3\u6253\u9020\u3002",
-        "featured.eyebrow": "\u7cbe\u9078\u4f5c\u54c1",
-        "featured.title": "\u7cbe\u9078\u5c08\u6848",
-        "featured.viewAll": "\u67e5\u770b\u6240\u6709\u5c08\u6848",
-        "contact.eyebrow": "\u806f\u7d61\u6211",
-        "contact.title": "\u4e00\u8d77\u6253\u9020",
-        "contact.titleEm": "\u6709\u610f\u7fa9\u7684\u4f5c\u54c1",
+        "nav.home": "首頁",
+        "nav.projects": "專案",
+        "footer.crafted": "用心打造。",
+        "featured.eyebrow": "精選作品",
+        "featured.title": "精選專案",
+        "featured.viewAll": "查看所有專案",
+        "contact.eyebrow": "聯絡我",
+        "contact.title": "一起打造",
+        "contact.titleEm": "有意義的作品",
         "contact.body":
-          "\u6b61\u8fce\u81ea\u7531\u63a5\u6848\u3001\u5408\u4f5c\u63d0\u6848\uff0c\u6216\u53ea\u662f\u804a\u804a\u6709\u8da3\u7684\u60f3\u6cd5\u3002\u5982\u679c\u4f60\u6709\u5024\u5f97\u5be6\u73fe\u7684\u9ede\u5b50\uff0c\u6211\u5f88\u6a02\u610f\u8046\u807d\u3002",
-        "contact.freelanceLabel": "\u81ea\u7531\u63a5\u6848",
-        "projects.eyebrow": "\u6240\u6709\u4f5c\u54c1",
-        "projects.title": "\u5c08\u6848\u5217\u8868",
-        "projects.sub":
-          "\u6211\u6240\u5efa\u7acb\u7684\u5b8c\u6574\u4f5c\u54c1\u96c6\u2014\u2014\u5de5\u5177\u3001\u5be6\u9a57\uff0c\u4ee5\u53ca\u5404\u7a2e\u5617\u8a66\u3002",
-        "projects.searchPlaceholder": "\u641c\u5c0b\u5c08\u6848\u2026",
-        "projects.searchAriaLabel": "\u641c\u5c0b\u5c08\u6848",
-        "projects.filterAriaLabel": "\u4f9d\u6a19\u7c64\u7be9\u9078",
-        "projects.tagAll": "\u5168\u90e8",
-        "projects.emptyTitle": "\u627e\u4e0d\u5230\u5c08\u6848",
-        "projects.emptySub":
-          "\u8acb\u5617\u8a66\u4e0d\u540c\u7684\u641c\u5c0b\u8a5e\u6216\u6a19\u7c64\u3002",
+          "歡迎合作提案，或只是聊聊有趣的想法。如果你有值得實現的點子，我很樂意聆聽。",
+        "contact.freelanceLabel": "自由接案",
+        "projects.eyebrow": "所有作品",
+        "projects.title": "專案列表",
+        "projects.sub": "精心整理過的專案列表。",
+        "projects.searchPlaceholder": "搜尋專案…",
+        "projects.searchAriaLabel": "搜尋專案",
+        "projects.filterAriaLabel": "依標籤篩選",
+        "projects.tagAll": "全部",
+        "projects.emptyTitle": "找不到專案",
+        "projects.emptySub": "請嘗試不同的搜尋詞或標籤。",
         "lang.toggle": "English",
       },
     };
@@ -319,7 +317,9 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
       const toggleLabel = document.getElementById("lang-toggle-label");
       if (toggleLabel) toggleLabel.textContent = t["lang.toggle"];
 
-      const toggleLabelMobile = document.getElementById("lang-toggle-label-mobile");
+      const toggleLabelMobile = document.getElementById(
+        "lang-toggle-label-mobile",
+      );
       if (toggleLabelMobile) toggleLabelMobile.textContent = t["lang.toggle"];
 
       const countEl = document.getElementById("results-count");
@@ -327,7 +327,7 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
         const n = parseInt(countEl.getAttribute("data-count") || "0", 10);
         countEl.textContent =
           locale === "zh-TW"
-            ? n + " \u500b\u5c08\u6848"
+            ? n + " 個專案"
             : n + " project" + (n !== 1 ? "s" : "");
       }
     }
@@ -350,9 +350,11 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     applyTheme(!root.classList.contains("dark"));
   });
 
-  document.getElementById("theme-toggle-mobile")!.addEventListener("click", () => {
-    applyTheme(!root.classList.contains("dark"));
-  });
+  document
+    .getElementById("theme-toggle-mobile")!
+    .addEventListener("click", () => {
+      applyTheme(!root.classList.contains("dark"));
+    });
 
   window
     .matchMedia("(prefers-color-scheme: dark)")
@@ -368,7 +370,9 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
   }
 
   document.getElementById("lang-toggle")!.addEventListener("click", toggleLang);
-  document.getElementById("lang-toggle-mobile")!.addEventListener("click", toggleLang);
+  document
+    .getElementById("lang-toggle-mobile")!
+    .addEventListener("click", toggleLang);
 
   const hamburger = document.getElementById("hamburger")!;
   const mobileMenu = document.getElementById("mobile-menu")!;
@@ -619,7 +623,9 @@ const ogImage = new URL(image, Astro.site ?? Astro.url.origin);
     width: 20px;
     height: 1.5px;
     background: var(--ink-soft);
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
     transform-origin: center;
   }
 
