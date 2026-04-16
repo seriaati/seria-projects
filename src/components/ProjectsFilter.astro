@@ -219,6 +219,11 @@ const { projects, starsMap = {} } = Astro.props;
     gap: 1.5px;
   }
 
+  .project-item {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 200px;
+  }
+
   .empty-state {
     padding: 4rem 0;
     text-align: center;
