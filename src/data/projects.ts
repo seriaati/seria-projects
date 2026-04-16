@@ -32,7 +32,7 @@ export const projects: Project[] = [
     name: "Embed Fixer",
     description: "A feature-rich Discord bot for fixing social media embeds.",
     descriptionZhTW: "修復社交媒體 Embed 的功能豐富的 Discord 機器人。",
-    repo: "embed-fixer",
+    repo: "embed fixer",
     tags: ["discord bot", "python"],
     featured: true,
     url: "https://ef.seria.moe",
@@ -211,7 +211,7 @@ export const projects: Project[] = [
     description: "Fixes Twitch clip embeds on Discord.",
     descriptionZhTW: "修復 Discord 上的 Twitch 切片連結預覽。",
     repo: "fxtwitch",
-    tags: ["python", "fastapi", "embed-fixer"],
+    tags: ["python", "fastapi", "embed fixer"],
     featured: false,
   },
   {
@@ -219,7 +219,7 @@ export const projects: Project[] = [
     description: "Fixes Iwara embeds on Discord.",
     descriptionZhTW: "修復 Discord 上的 Iwara 連結預覽。",
     repo: "fxiwara",
-    tags: ["python", "fastapi", "embed-fixer"],
+    tags: ["python", "fastapi", "embed fixer"],
     featured: false,
   },
   {
@@ -227,7 +227,7 @@ export const projects: Project[] = [
     description: "Fixes Facebook reel embeds on Discord (unstable).",
     descriptionZhTW: "修復 Discord 上的 Facebook 短影片連結預覽（不穩定）。",
     repo: "fxfacebook",
-    tags: ["python", "fastapi", "embed-fixer"],
+    tags: ["python", "fastapi", "embed fixer"],
     featured: false,
   },
   {
@@ -235,7 +235,7 @@ export const projects: Project[] = [
     description: "Fixes BiliBili video embeds on Discord.",
     descriptionZhTW: "修復 Discord 上的 BiliBili 影片連結預覽。",
     repo: "fxbilibili",
-    tags: ["python", "fastapi", "embed-fixer"],
+    tags: ["python", "fastapi", "embed fixer"],
     featured: false,
   },
   {
@@ -243,7 +243,7 @@ export const projects: Project[] = [
     description: "Fixes PTT embeds on Discord.",
     descriptionZhTW: "修復 Discord 上的 PTT 連結預覽。",
     repo: "fxptt",
-    tags: ["python", "fastapi", "embed-fixer"],
+    tags: ["python", "fastapi", "embed fixer"],
     featured: false,
   },
   {
