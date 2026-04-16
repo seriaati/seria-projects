@@ -82,6 +82,7 @@
       const len = el.getComputedTextLength();
       el.style.strokeDasharray = String(len);
       el.style.strokeDashoffset = String(len);
+      el.style.opacity = "1";
     });
 
     seria.classList.add("animate-seria");
@@ -214,6 +215,7 @@
     stroke-width: 2px;
     stroke-linecap: round;
     stroke-linejoin: round;
+    opacity: 0;
   }
 
   .title-seria {
