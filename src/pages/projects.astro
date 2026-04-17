@@ -80,6 +80,10 @@ const sortedProjects = [...projects].sort(
     margin-bottom: 1rem;
   }
 
+  :global(html[lang="en"]) .page-title {
+    font-family: var(--script);
+  }
+
   .page-sub {
     font-family: var(--serif);
     font-size: clamp(1rem, 1.5vw, 1.125rem);
