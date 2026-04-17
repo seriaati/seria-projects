@@ -129,6 +129,10 @@ const githubUrl = `https://github.com/seriaati/${project.repo}`;
     };
     applyTheme();
 
+    new MutationObserver(applyTheme).observe(document.documentElement, {
+      attributeFilter: ["class"],
+    });
+
     document.querySelectorAll<HTMLElement>(".project-card").forEach((card) => {
       const githubUrl = card.dataset.github!;
       const link = card.querySelector<HTMLElement>(".card-link");
