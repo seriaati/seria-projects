@@ -32,7 +32,7 @@ export const projects: Project[] = [
     name: "Embed Fixer",
     description: "A feature-rich Discord bot for fixing social media embeds.",
     descriptionZhTW: "修復社交媒體 Embed 的功能豐富的 Discord 機器人。",
-    repo: "embed fixer",
+    repo: "embed-fixer",
     tags: ["discord bot", "python"],
     featured: true,
     url: "https://ef.seria.moe",
