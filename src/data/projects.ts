@@ -398,6 +398,14 @@ export const projects: Project[] = [
     tags: ["python", "stocks"],
     featured: false,
   },
+  {
+    name: "Keni",
+    description: "Open-source AI personal finance tracker .",
+    descriptionZhTW: "開源 AI 個人財務追蹤器。",
+    repo: "keni",
+    tags: ["python", "ai"],
+    featured: true,
+  },
 ];
 
 export const allTags = [...new Set(projects.flatMap((p) => p.tags))].sort();
