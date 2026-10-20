@@ -170,10 +170,12 @@
         window.addEventListener("deviceorientation", handleOrientation);
       }
     } else {
+      const CURSOR_STRENGTH = 0.4;
+
       hero.addEventListener("mousemove", (e) => {
         const rect = hero.getBoundingClientRect();
-        mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-        mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * CURSOR_STRENGTH;
+        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * CURSOR_STRENGTH;
       });
 
       hero.addEventListener("mouseleave", () => {
