@@ -2,7 +2,7 @@ export interface Project {
   name: string;
   description: string;
   descriptionZhTW?: string;
-  repo: string;
+  repo: string; // "name" for seriaati's repos, or "owner/name"
   url?: string;
   icon?: string;
   banner?: string;
@@ -346,7 +346,7 @@ export const projects: Project[] = [
     name: "News Notify",
     description: "A LINE bot that notifies you when a company makes an announcement.",
     descriptionZhTW: "當公司發布重大訊息時通知你的 LINE 機器人。",
-    repo: "news-notify",
+    repo: "chatmind-studio/news-notify",
     tags: ["line bot", "python"],
     featured: false,
   },
@@ -354,7 +354,7 @@ export const projects: Project[] = [
     name: "Revenue Notifier",
     description: "A Line bot that notifies you when a company releases their revenue report.",
     descriptionZhTW: "當公司發布營收報告時通知你的 LINE 機器人。",
-    repo: "company-revenue-notifier",
+    repo: "chatmind-studio/company-revenue-notifier",
     tags: ["line bot", "python"],
     featured: false,
   },
@@ -362,7 +362,7 @@ export const projects: Project[] = [
     name: "Stock Buyer",
     description: "Allows you to buy stocks through LINE.",
     descriptionZhTW: "允許你通過 LINE 購買股票。",
-    repo: "stock-buyer",
+    repo: "chatmind-studio/stock-buyer",
     tags: ["line bot", "python"],
     featured: false,
   },
@@ -370,7 +370,7 @@ export const projects: Project[] = [
     name: "Momo Tracker",
     description: "Tracks Momo products and notify you when they are on sale.",
     descriptionZhTW: "追蹤 momo 商品並在其打折時通知你。",
-    repo: "momo-tracker",
+    repo: "chatmind-studio/momo-tracker",
     tags: ["line bot", "python"],
     featured: false,
   },
@@ -378,7 +378,7 @@ export const projects: Project[] = [
     name: "Restaurant Bot",
     description: "Sample restaurant LINE bot.",
     descriptionZhTW: "LINE 餐廳機器人示例。",
-    repo: "RestaurantBot",
+    repo: "chatmind-studio/RestaurantBot",
     tags: ["line bot", "python"],
     featured: false,
   },
@@ -386,7 +386,7 @@ export const projects: Project[] = [
     name: "Burberry Bot",
     description: "Compare prices of Burberry products between Taiwan and Japan.",
     descriptionZhTW: "比較台灣和日本 Burberry 產品價格。",
-    repo: "BurberryLineBot",
+    repo: "chatmind-studio/BurberryLineBot",
     tags: ["line bot", "python"],
     featured: false,
   },

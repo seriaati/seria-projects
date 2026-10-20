@@ -5,7 +5,8 @@ export async function fetchStars(repos: string[]): Promise<Record<string, number
   const fields = repos
     .map((repo, i) => {
       const alias = `r${i}`;
-      return `${alias}: repository(owner: "${OWNER}", name: "${repo}") { stargazerCount }`;
+      const [owner, name] = repo.includes("/") ? repo.split("/") : [OWNER, repo];
+      return `${alias}: repository(owner: "${owner}", name: "${name}") { stargazerCount }`;
     })
     .join("\n");
 

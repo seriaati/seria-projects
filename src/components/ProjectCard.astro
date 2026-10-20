@@ -8,7 +8,8 @@ interface Props {
 }
 
 const { project, index = 0, stars } = Astro.props;
-const githubUrl = `https://github.com/seriaati/${project.repo}`;
+const fullRepo = project.repo.includes("/") ? project.repo : `seriaati/${project.repo}`;
+const githubUrl = `https://github.com/${fullRepo}`;
 ---
 
 <article class="project-card" style={`--i: ${index}`} data-github={githubUrl}>
