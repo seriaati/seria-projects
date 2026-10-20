@@ -46,14 +46,6 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    name: "Wuthery",
-    description: "A service for the game Wuthering Waves, a big project collaborated with other devs.",
-    descriptionZhTW: "與其他開發者合作的一個大型項目，這是一個為遊戲《鳴潮》設計的服務。",
-    repo: "Wuthery",
-    tags: ["discord bot", "python"],
-    featured: false,
-  },
-  {
     name: "Layla",
     description: "A small bot with anime image searching features derived from Shenhe.",
     descriptionZhTW: "一個衍生自 Shenhe 的小型機器人，具有動漫圖片搜索功能。",
