@@ -169,13 +169,33 @@ const { projects, starsMap = {}, totalStars = 0 } = Astro.props;
     filter();
   });
 
+  function setTag(tag: string) {
+    const btn =
+      Array.from(tagButtons).find((b) => b.dataset.tag === tag) ??
+      tagButtons[0];
+    activeTag = btn.dataset.tag ?? "all";
+    tagButtons.forEach((b) => b.classList.toggle("active", b === btn));
+    filter();
+  }
+
+  function tagFromHash() {
+    return decodeURIComponent(location.hash.slice(1)) || "all";
+  }
+
   tagButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      activeTag = btn.dataset.tag ?? "all";
-      tagButtons.forEach((b) => b.classList.toggle("active", b === btn));
-      filter();
+      const tag = btn.dataset.tag ?? "all";
+      const url =
+        tag === "all"
+          ? location.pathname + location.search
+          : `#${encodeURIComponent(tag)}`;
+      history.replaceState(null, "", url);
+      setTag(tag);
     });
   });
+
+  window.addEventListener("hashchange", () => setTag(tagFromHash()));
+  setTag(tagFromHash());
 </script>
 
 <style>
