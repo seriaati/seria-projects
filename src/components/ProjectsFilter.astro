@@ -61,14 +61,27 @@ const { projects, starsMap = {}, totalStars = 0 } = Astro.props;
   </div>
 
   <div class="results-meta" aria-live="polite">
-    <span
-      id="results-count"
-      data-count={projects.length}
-      data-stars={totalStars}
-      >{projects.length} projects{
-        totalStars > 0 ? `, ${totalStars.toLocaleString()} stars` : ""
-      }</span
+    <span id="results-count" data-count={projects.length}
+      >{projects.length} projects</span
     >
+    {
+      totalStars > 0 && (
+        <span class="results-stars">
+          <span aria-hidden="true">·</span>
+          {totalStars.toLocaleString()}
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            role="img"
+            aria-label="stars"
+          >
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        </span>
+      )
+    }
   </div>
 
   <div class="projects-grid" id="projects-grid">
@@ -148,18 +161,11 @@ const { projects, starsMap = {}, totalStars = 0 } = Astro.props;
       }
     });
 
-    const stars = parseInt(countEl.getAttribute("data-stars") || "0", 10);
-    const starsText =
-      stars > 0
-        ? locale === "zh-TW"
-          ? `，${stars.toLocaleString()} 顆星星`
-          : `, ${stars.toLocaleString()} stars total`
-        : "";
     countEl.setAttribute("data-count", String(visible));
     countEl.textContent =
       locale === "zh-TW"
-        ? `${visible} 個專案${starsText}`
-        : `${visible} project${visible !== 1 ? "s" : ""}${starsText}`;
+        ? `${visible} 個專案`
+        : `${visible} project${visible !== 1 ? "s" : ""}`;
     emptyState.hidden = visible > 0;
     grid.hidden = visible === 0;
   }
@@ -284,9 +290,18 @@ const { projects, starsMap = {}, totalStars = 0 } = Astro.props;
   }
 
   .results-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     font-size: 0.8125rem;
     color: var(--ink-muted);
     letter-spacing: 0.04em;
+  }
+
+  .results-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
   }
 
   .projects-grid {
