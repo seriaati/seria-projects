@@ -291,14 +291,14 @@
   /* After stroke draws, fill fades in */
   .title-seria.animate-seria {
     animation:
-      stroke-draw 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards,
-      fill-in 0.5s ease 1.6s forwards;
+      stroke-draw 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards,
+      fill-in 0.4s ease 1.1s forwards;
   }
 
   .title-projects.animate-projects {
     animation:
-      stroke-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards,
-      fill-in 0.5s ease 2.2s forwards;
+      stroke-draw 1.1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards,
+      fill-in 0.4s ease 1.6s forwards;
   }
 
   @keyframes stroke-draw {
@@ -411,7 +411,7 @@
     transform: translateX(-50%);
     z-index: 1;
     opacity: 0;
-    animation: fade-in 0.6s ease 2.8s forwards;
+    animation: fade-in 0.6s ease 2s forwards;
     background: none;
     border: none;
     padding: 0.5rem;
@@ -422,7 +422,7 @@
     width: 20px;
     height: 20px;
     color: color-mix(in oklch, var(--ink) 35%, transparent);
-    animation: scroll-bounce 2s ease-in-out 3.4s infinite;
+    animation: scroll-bounce 2s ease-in-out 2.6s infinite;
   }
 
   @keyframes scroll-bounce {
