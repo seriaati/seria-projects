@@ -50,11 +50,15 @@
 
   <div class="hero-decoration" aria-hidden="true">
     <div class="deco-circle"></div>
-    <div class="deco-line deco-line-1"></div>
-    <div class="deco-line deco-line-2"></div>
-    <div class="deco-dot deco-dot-1"></div>
-    <div class="deco-dot deco-dot-2"></div>
-    <div class="deco-dot deco-dot-3"></div>
+    <div class="deco-group deco-group-1">
+      <div class="deco-line deco-line-1"></div>
+      <div class="deco-dot deco-dot-1"></div>
+      <div class="deco-dot deco-dot-2"></div>
+    </div>
+    <div class="deco-group deco-group-2">
+      <div class="deco-line deco-line-2"></div>
+      <div class="deco-dot deco-dot-3"></div>
+    </div>
   </div>
 </section>
 
@@ -114,125 +118,6 @@
     document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" });
   });
 
-  const hero = document.querySelector<HTMLElement>(".hero");
-  const titleWrap = document.querySelector<HTMLElement>(".hero-title-wrap");
-  const decoCircle = document.querySelector<HTMLElement>(".deco-circle");
-  const decoLine1 = document.querySelector<HTMLElement>(".deco-line-1");
-  const decoLine2 = document.querySelector<HTMLElement>(".deco-line-2");
-  const decoDot1 = document.querySelector<HTMLElement>(".deco-dot-1");
-  const decoDot2 = document.querySelector<HTMLElement>(".deco-dot-2");
-  const decoDot3 = document.querySelector<HTMLElement>(".deco-dot-3");
-  if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    // skip cursor effects
-  } else {
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    const isTouchOnly = window.matchMedia(
-      "(hover: none) and (pointer: coarse)",
-    ).matches;
-
-    if (isTouchOnly) {
-      const TILT_RANGE = 15;
-
-      function handleOrientation(e: DeviceOrientationEvent) {
-        if (e.gamma === null || e.beta === null) return;
-        mouseX = Math.max(-0.5, Math.min(0.5, e.gamma / (TILT_RANGE * 2)));
-        mouseY = Math.max(
-          -0.5,
-          Math.min(0.5, (e.beta - 45) / (TILT_RANGE * 1.2)),
-        );
-      }
-
-      if (
-        typeof DeviceOrientationEvent !== "undefined" &&
-        typeof (DeviceOrientationEvent as any).requestPermission === "function"
-      ) {
-        hero.addEventListener(
-          "click",
-          async () => {
-            try {
-              const permission = await (
-                DeviceOrientationEvent as any
-              ).requestPermission();
-              if (permission === "granted") {
-                window.addEventListener("deviceorientation", handleOrientation);
-              }
-            } catch {
-              // permission denied or unavailable
-            }
-          },
-          { once: true },
-        );
-      } else {
-        window.addEventListener("deviceorientation", handleOrientation);
-      }
-    } else {
-      const CURSOR_STRENGTH = 0.4;
-
-      hero.addEventListener("mousemove", (e) => {
-        const rect = hero.getBoundingClientRect();
-        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * CURSOR_STRENGTH;
-        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * CURSOR_STRENGTH;
-      });
-
-      hero.addEventListener("mouseleave", () => {
-        mouseX = 0;
-        mouseY = 0;
-      });
-    }
-
-    function lerp(a: number, b: number, t: number) {
-      return a + (b - a) * t;
-    }
-
-    const lerpSpeed = isTouchOnly ? 0.1 : 0.06;
-
-    function tick() {
-      currentX = lerp(currentX, mouseX, lerpSpeed);
-      currentY = lerp(currentY, mouseY, lerpSpeed);
-
-      if (titleWrap) {
-        titleWrap.style.transform = `translate(${currentX * 18}px, ${currentY * 12}px)`;
-      }
-
-      if (decoCircle) {
-        decoCircle.style.setProperty("--cx", `${currentX * -28}px`);
-        decoCircle.style.setProperty("--cy", `${currentY * -20}px`);
-      }
-
-      if (decoLine1) {
-        decoLine1.style.setProperty("--cx", `${currentX * 14}px`);
-        decoLine1.style.setProperty("--cy", `${currentY * 22}px`);
-      }
-
-      if (decoLine2) {
-        decoLine2.style.setProperty("--cx", `${currentX * 20}px`);
-        decoLine2.style.setProperty("--cy", `${currentY * 10}px`);
-      }
-
-      if (decoDot1) {
-        decoDot1.style.setProperty("--cx", `${currentX * 30}px`);
-        decoDot1.style.setProperty("--cy", `${currentY * 24}px`);
-      }
-
-      if (decoDot2) {
-        decoDot2.style.setProperty("--cx", `${currentX * -22}px`);
-        decoDot2.style.setProperty("--cy", `${currentY * 18}px`);
-      }
-
-      if (decoDot3) {
-        decoDot3.style.setProperty("--cx", `${currentX * 16}px`);
-        decoDot3.style.setProperty("--cy", `${currentY * -26}px`);
-      }
-
-      requestAnimationFrame(tick);
-    }
-
-    tick();
-  }
 </script>
 
 <style>
@@ -256,7 +141,6 @@
 
   .hero-title-wrap {
     width: 100%;
-    will-change: transform;
   }
 
   .title-svg {
@@ -315,7 +199,65 @@
     }
   }
 
-  /* Decorative */
+  /* Decorative: the circle and two small constellations drift on their own.
+     Keyframes use literal values (no var()) so Firefox can run them on the
+     compositor; with var() it falls back to the main thread and stutters. */
+  @keyframes drift-circle {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    25% {
+      translate: 14px -10px;
+    }
+    50% {
+      translate: -6px -18px;
+    }
+    75% {
+      translate: -14px 6px;
+    }
+  }
+
+  @keyframes drift-const-1 {
+    0%,
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+    25% {
+      translate: -6px 8px;
+      rotate: 1.5deg;
+    }
+    50% {
+      translate: 5px 14px;
+      rotate: -1deg;
+    }
+    75% {
+      translate: 8px 3px;
+      rotate: 1deg;
+    }
+  }
+
+  @keyframes drift-const-2 {
+    0%,
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+    25% {
+      translate: 8px -6px;
+      rotate: -1deg;
+    }
+    50% {
+      translate: -4px -12px;
+      rotate: 1.5deg;
+    }
+    75% {
+      translate: -10px -2px;
+      rotate: -0.5deg;
+    }
+  }
+
   .hero-decoration {
     position: absolute;
     inset: 0;
@@ -327,14 +269,33 @@
     position: absolute;
     right: -8rem;
     top: 50%;
-    translate: 0 -50%;
-    transform: translate(var(--cx, 0px), var(--cy, 0px));
+    margin-top: calc(clamp(20rem, 35vw, 42rem) / -2);
     width: clamp(20rem, 35vw, 42rem);
     height: clamp(20rem, 35vw, 42rem);
     border-radius: 50%;
     border: 1px solid color-mix(in oklch, var(--ink) 6%, transparent);
     opacity: 0;
-    animation: fade-in 1.5s ease 0.3s forwards;
+    will-change: transform;
+    animation:
+      fade-in 1.5s ease 0.3s forwards,
+      drift-circle 46s ease-in-out infinite;
+  }
+
+  /* Each group spans the hero and turns about its line's anchored end */
+  .deco-group {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+  }
+
+  .deco-group-1 {
+    transform-origin: calc(100% - clamp(8rem, 20vw, 22rem)) 0;
+    animation: drift-const-1 26s ease-in-out infinite;
+  }
+
+  .deco-group-2 {
+    transform-origin: 100% 75%;
+    animation: drift-const-2 32s ease-in-out -9s infinite;
   }
 
   .deco-line {
@@ -349,8 +310,6 @@
     height: 30vh;
     right: clamp(8rem, 20vw, 22rem);
     top: 0;
-    transform: translate(var(--cx, 0px), var(--cy, 0px));
-    animation: fade-in 1s ease 1s forwards;
   }
 
   .deco-line-2 {
@@ -358,8 +317,6 @@
     height: 1px;
     right: 0;
     bottom: 25%;
-    transform: translate(var(--cx, 0px), var(--cy, 0px));
-    animation: fade-in 1s ease 1s forwards;
   }
 
   .deco-dot {
@@ -375,8 +332,7 @@
     height: 5px;
     right: clamp(8rem, 20vw, 22rem);
     top: 30vh;
-    transform: translate(var(--cx, 0px), var(--cy, 0px));
-    animation: fade-in 0.5s ease 1.2s forwards;
+    animation-delay: 1.2s;
   }
 
   .deco-dot-2 {
@@ -384,8 +340,7 @@
     height: 3px;
     right: calc(clamp(8rem, 20vw, 22rem) - 40px);
     top: 30vh;
-    transform: translate(var(--cx, 0px), var(--cy, 0px));
-    animation: fade-in 0.5s ease 1.4s forwards;
+    animation-delay: 1.4s;
   }
 
   .deco-dot-3 {
@@ -394,8 +349,7 @@
     right: 20vw;
     bottom: 25%;
     background: color-mix(in oklch, var(--accent) 40%, transparent);
-    transform: translate(var(--cx, 0px), var(--cy, 0px));
-    animation: fade-in 0.5s ease 1.6s forwards;
+    animation-delay: 1.6s;
   }
 
   @keyframes fade-in {
@@ -442,6 +396,10 @@
     .scroll-hint {
       animation: none;
       opacity: 1;
+    }
+
+    .deco-group {
+      animation: none;
     }
 
     .scroll-arrow {
