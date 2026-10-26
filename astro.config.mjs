@@ -5,6 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: "https://projects.seria.moe",
+  build: {
+    inlineStylesheets: "always",
+  },
   fonts: [
     {
       name: "Cormorant Garamond",
