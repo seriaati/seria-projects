@@ -108,8 +108,12 @@
     }
   }
 
-  if (document.fonts) {
-    document.fonts.ready.then(measureAndAnimate);
+  // Wait only for the title's script font, not every font on the page
+  const titleText = document.querySelector(".title-svg-text");
+  if (document.fonts && titleText) {
+    document.fonts
+      .load(`160px ${getComputedStyle(titleText).fontFamily}`)
+      .then(measureAndAnimate, measureAndAnimate);
   } else {
     window.addEventListener("load", measureAndAnimate);
   }
