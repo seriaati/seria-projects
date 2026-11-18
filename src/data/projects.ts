@@ -67,7 +67,7 @@ export const projects: Project[] = [
     descriptionZhTW: "輕鬆製作炫酷的身份組面板。",
     repo: "roler",
     tags: ["discord bot", "python"],
-    featured: true,
+    featured: false,
     url: "https://roler.seria.moe",
   },
   {
@@ -478,7 +478,7 @@ export const projects: Project[] = [
     descriptionZhTW: "開源、可自架的電子郵件客戶端，幫助你從容達成收件匣清零。",
     repo: "kanso",
     tags: ["web", "python", "ai"],
-    featured: false,
+    featured: true,
     url: "https://demo.kanso.seria.moe",
   },
   {
@@ -513,7 +513,7 @@ export const projects: Project[] = [
     descriptionZhTW: "答案越冷門，就潛得越深的網頁遊戲。",
     repo: "hadal",
     tags: ["web", "typescript", "game"],
-    featured: false,
+    featured: true,
     url: "https://hadal.seria.moe",
   },
   {
