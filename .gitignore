@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Serena
 .serena/
+
+# wrangler local state
+.wrangler/

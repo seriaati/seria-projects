@@ -1,0 +1,9 @@
+// Rebuilds the Pages site daily so GitHub star counts stay current.
+// Secret (set with `wrangler secret put`): DEPLOY_HOOK.
+{
+  "name": "seria-projects-rebuild",
+  "main": "index.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": false,
+  "triggers": { "crons": ["0 0 * * *"] },
+}
